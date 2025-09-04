@@ -1140,7 +1140,7 @@ omics <- R6::R6Class(
                         pvalue.threshold = 0.05,
                         perm = 999,
                         cpus = 1,
-                        filename = paste0(getwd(), "report.html")
+                        filename = paste0(getwd(), "/report.html")
                       ) {
     ## Error handling
     #--------------------------------------------------------------------#
