@@ -913,7 +913,7 @@ omics <- R6::R6Class(
           theme_bw() +
           scale_x_continuous(breaks=seq(1, 10, 1)) +
           scale_y_continuous(breaks=seq(0, 100, 10)) +
-          labs(title = paste0("Screeplot of ", length(pcs$eig_norm)," PCs"),
+          labs(title = paste0("Screeplot of ", length(pcs$eig_norm[1:10])," PCs"),
                x = "Principal Components (PCs)",
                y = "dissimilarity explained [%]")
 
@@ -1001,7 +1001,7 @@ omics <- R6::R6Class(
       #--------------------------------------------------------------------#
 
       if (!is.character(feature_rank) && length(feature_rank) != 1)
-        cli::cli_abort("{feature_rank} needs to be a character with a lenght of 1")
+        cli::cli_abort("{feature_rank} needs to be a character with a length of 1")
 
       if (!is.character(condition.group) && length(condition.group) != 1) {
         cli::cli_abort("{condition.group} needs to be a character with a length of 1")
@@ -1146,23 +1146,23 @@ omics <- R6::R6Class(
     #--------------------------------------------------------------------#
 
     if (!is.character(filename) && length(filename) != 1)
-      cli::cli_abort("{filename} needs to be a character with a lenght of 1")
+      cli::cli_abort("{filename} needs to be a character with a length of 1")
       
     if (!is.character(feature_contrast) && length(feature_contrast) != 1) {
-      cli::cli_abort("{feature_contrast} needs to be a character with a lenght of 1")
+      cli::cli_abort("{feature_contrast} needs to be a character with a length of 1")
     } else if (!column_exists(feature_contrast, self$featureData)) {
       cli::cli_abort("{feature_contrast} does not exist in featureData!")
     }
 
     if (!is.null(beta_div_table) && !is.character(beta_div_table) && length(beta_div_table) != 1) {
-      cli::cli_abort("{beta_div_table} needs to be a character with a lenght of 1")
+      cli::cli_abort("{beta_div_table} needs to be a character with a length of 1")
     
       if (file.exists(beta_div_table))
         cli::cli_abort("{beta_div_table} already exists!")
     }
 
     if (!is.null(alpha_div_table) && !is.character(alpha_div_table) && length(alpha_div_table) != 1) {
-      cli::cli_abort("{alpha_div_table} needs to be a character with a lenght of 1")
+      cli::cli_abort("{alpha_div_table} needs to be a character with a length of 1")
 
       if (file.exists(alpha_div_table))
         cli::cli_abort("{alpha_div_table} already exists!")
@@ -1471,20 +1471,13 @@ omics <- R6::R6Class(
     css_path <- system.file("styles.css", package = "OmicFlow")
 
     ## To bypass R CMD error and define for docker
-    is_r_cmd_check <- nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_", ""))
-    if (is_r_cmd_check) {
-      intermediate_dir <- NULL
-      root_dir <- NULL
-    } else {
-      intermediate_dir <- dirname(filename)
-      root_dir <- dirname(filename)
-    }
+    knit_dir <- dirname(filename)
     
     rmarkdown::render(
       input = rmd_path,
       output_file = filename,
-      intermediates_dir = intermediate_dir,
-      knit_root_dir = root_dir,
+      intermediates_dir = knit_dir,
+      knit_root_dir = knit_dir,
       output_options = list(css = css_path)
     )
   }
