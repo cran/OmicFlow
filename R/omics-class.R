@@ -190,8 +190,17 @@ omics <- R6::R6Class(
     #' Removes empty (zero) values by row and column from the `countData`.
     #' This method is performed automatically during subsetting of the object.
     #' @examples
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' obj$removeZeros()
     #' 
@@ -212,8 +221,17 @@ omics <- R6::R6Class(
     #' Remove NAs from `metaData` and updates the `countData`.
     #' @param column The column from where NAs should be removed, this can be either a wholenumbers or characters. Vectors are also supported.
     #' @examples
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' obj$removeNAs(column = "treatment")
     #' 
@@ -244,8 +262,17 @@ omics <- R6::R6Class(
     #' @param ... Expressions that return a logical value, and are defined in terms of the variables in `featureData`.
     #' Only rows for which all conditions evaluate to TRUE are kept.
     #' @examples
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' obj$feature_subset(Genus == "Streptococcus")
     #' 
@@ -268,8 +295,17 @@ omics <- R6::R6Class(
     #' @param ... Expressions that return a logical value, and are defined in terms of the variables in `metaData`.
     #' Only rows for which all conditions evaluate to TRUE are kept.
     #' @examples
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' obj$sample_subset(treatment == "tumor")
     #'
@@ -319,8 +355,17 @@ omics <- R6::R6Class(
     #' @param feature_rank A character value or vector of columns to aggregate from the `featureData`.
     #' @param feature_filter A character value or vector of characters to remove features via regex pattern.
     #' @examples
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' obj$feature_merge(feature_rank = c("Kingdom", "Phylum"))
     #' obj$feature_merge(feature_rank = "Genus", feature_filter = c("uncultured", "metagenome"))
@@ -403,8 +448,17 @@ omics <- R6::R6Class(
     #' Performs transformation on the positive values from the `countData`.
     #' @param FUN A function such as \code{log2}, \code{log}
     #' @examples
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' obj$transform(log2)
     #'
@@ -426,8 +480,17 @@ omics <- R6::R6Class(
     #' @description
     #' Relative abundance computation by column sums on the `countData`.
     #' @examples
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' obj$normalize()
     #'
@@ -443,9 +506,17 @@ omics <- R6::R6Class(
     #' @param feature_ranks A vector of characters or integers that match the `featureData`.
     #' @examples
     #' library(ggplot2)
-    #' 
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' plt <- obj$rankstat(feature_ranks = c("Kingdom", "Phylum", "Family", "Genus", "Species"))
     #' plt
@@ -507,9 +578,17 @@ omics <- R6::R6Class(
     #' @param p.adjust.method A character variable to specify the p.adjust.method to be used, default is 'fdr'.
     #' @examples
     #' library(ggplot2)
-    #' 
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #' 
     #' plt <- obj$alpha_diversity(col_name = "treatment",
     #'                            metric = "shannon")
@@ -598,12 +677,19 @@ omics <- R6::R6Class(
     #' @param feature_top A wholenumber of the top features to visualize, the max is 15, due to a limit of palettes.
     #' @param normalize A boolean value, whether to [`normalize()`](#method-normalize) by total sample sums (Default: TRUE).
     #' @param Brewer.palID A character name for the palette set to be applied, see \link[RColorBrewer]{brewer.pal} or \link{colormap}.
-    #' @importFrom viridis viridis
     #' @examples
     #' library(ggplot2)
-    #' 
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #'
     #' result <- obj$composition(feature_rank = "Genus",
     #'                           feature_filter = c("uncultured"),
@@ -691,9 +777,7 @@ omics <- R6::R6Class(
 
       # Creates palette
       df_taxa_len <- length(final_dt[[feature_rank]])
-      if (Brewer.palID == FALSE) {
-        chosen_palette <- viridis(df_taxa_len - 1)
-      } else if (df_taxa_len-1 <= 15 && df_taxa_len-1 > 10) {
+      if (df_taxa_len-1 <= 15 && df_taxa_len-1 > 10) {
         chosen_palette <- c("#000000","#004949","#009292","#ff6db6","#ffb6db",
                             "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
                             "#920000","#924900","#db6d00","#24ff24","#ffff6d")[1:df_taxa_len-1]
@@ -735,24 +819,106 @@ omics <- R6::R6Class(
       )
     },
     #' @description
+    #' Compute a distance metric from `countData`
+    #' @param metric A dissimilarity metric to be applied on the `countData`, 
+    #' thus far supports 'bray', 'jaccard', 'cosine', 'manhattan', 'jsd' (jensen-shannon divergence), 'canberra' and 'unifrac' when a tree is provided via `treeData`, see [`distance()`](#method-distance).
+    #' @param weighted A boolean value, to use abundances (\code{weighted = TRUE}) or absence/presence (\code{weighted=FALSE}) (default: TRUE).
+    #' @param normalized A boolean value, whether to [`normalize()`](#method-normalize) by total sample sums (Default: TRUE).
+    #' @param threads A wholenumber, indicating the number of threads to use (Default: 1).
+    #' @return A column x column \link[stats]{dist} object.
+    #' @examples
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'     metaData = metadata_file,
+    #'     countData = counts_file,
+    #'     featureData = features_file
+    #' )
+    #'
+    #' obj$feature_subset(Kingdom == "Bacteria")
+    #' dist <- obj$distance(metric = "bray")
+    #' @seealso \link{bray}, \link{canberra}, \link{cosine}, \link{jaccard}, \link{jsd}, \link{manhattan}, \link{unifrac}
+    distance = function(metric, normalized = TRUE, weighted = TRUE, threads = 1) {
+
+      ## Error handling
+      #--------------------------------------------------------------------#
+      OPTIONS <- c(
+        "bray", "jaccard", "cosine", "manhattan",
+        "jsd", "canberra", "unifrac"
+        )
+
+      if (!is.character(metric) && length(metric) != 1) {
+        cli::cli_abort("{metric} needs to be a character with a length of 1")
+      } else if (!metric %in% OPTIONS) {
+        cli::cli_abort("{metric} is not a valid metric. Valid options: {OPTIONS}")
+      }
+
+      if (!is.wholenumber(threads))
+        cli::cli_abort("{threads} need to be an integer!")
+
+      if (is.null(self$treeData) && metric == "unifrac")
+        cli::cli_abort("The specified {metric} is invalid since no `treeData` is supplied.")
+
+      ## MAIN
+      #--------------------------------------------------------------------#
+
+      # Copies object to prevent modification of omics class components
+      private$tmp_link(
+        .countData = self$countData,
+        .featureData = self$featureData,
+        .metaData = self$metaData,
+        .treeData = self$treeData
+      )
+      
+      # Restores omics class components
+      on.exit(private$tmp_restore(), add = TRUE)
+
+      # Normalizes counts
+      if (normalized)
+        self$normalize()
+
+      distmat <- switch(
+        metric,
+        "unifrac" = OmicFlow::unifrac(x = self$countData, tree = self$treeData, weighted=weighted, normalized=normalized, threads=threads),
+        "manhattan" = OmicFlow::manhattan(x = self$countData, weighted=weighted, threads=threads),
+        "canberra" = OmicFlow::canberra(x = self$countData, weighted=weighted, threads=threads),
+        "jaccard" = OmicFlow::jaccard(x = self$countData, weighted=weighted, threads=threads),
+        "bray" = OmicFlow::bray(x = self$countData, weighted=weighted, threads=threads),
+        "jsd" = OmicFlow::jsd(x = self$countData, weighted=weighted, threads=threads),
+        "cosine" = OmicFlow::cosine(x = self$countData, weighted=weighted, threads=threads)
+      )
+
+      return(distmat)
+    },
+    #' @description
     #' Ordination of `countData` with statistical testing.
     #' @param metric A dissimilarity or similarity metric to be applied on the `countData`, 
-    #' thus far supports 'bray', 'jaccard' and 'unifrac' when a tree is provided via `treeData`, see \link[rbiom]{bdiv_distmat}.
+    #' thus far supports 'bray', 'jaccard', 'cosine', 'manhattan', 'jsd' (jensen-shannon divergence), 'canberra' and 'unifrac' when a tree is provided via `treeData`, see [`distance()`](#method-distance).
     #' @param method Ordination method, supports "pcoa" and "nmds", see \link[vegan]{wcmdscale}.
     #' @param distmat A custom distance matrix in either \link[stats]{dist} or \link[Matrix]{Matrix} format.
     #' @param group_by A character variable in `metaData` to be used for the \link{pairwise_adonis} or \link{pairwise_anosim} statistical test.
     #' @param weighted A boolean value, whether to compute weighted or unweighted dissimilarities (Default: TRUE).
     #' @param normalize A boolean value, whether to [`normalize()`](#method-normalize) by total sample sums (Default: TRUE).
-    #' @param cpus A wholenumber, indicating the number of processes to spawn (Default: 1) in \link[rbiom]{bdiv_distmat}.
+    #' @param threads A wholenumber, indicating the number of threads to use (Default: 1).
+    #' @param perm_design A function that takes `metaData` and constructs a permutation design with \link[permute]{how} (default: NULL).
     #' @param perm A wholenumber, number of permutations to compare against the null hypothesis of \link[vegan]{adonis2} and \link[vegan]{anosim} (default: \code{perm=999}).
-    #' @importFrom purrr map
-    #' @importFrom rbiom bdiv_distmat
-    #' @importFrom slam as.simple_triplet_matrix
     #' @examples
     #' library(ggplot2)
-    #' 
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #'
     #' pcoa_plots <- obj$ordination(metric = "bray",
     #'                              method = "pcoa",
@@ -770,21 +936,18 @@ omics <- R6::R6Class(
     #'  * `scores_plot` A \link[ggplot2]{ggplot} object.
     #' 
     #' @seealso \link{ordination_plot}, \link{plot_pairwise_stats}, \link{pairwise_anosim}, \link{pairwise_adonis}
-    ordination = function(metric = c("bray", "jaccard", "unifrac"),
+    ordination = function(metric = "bray",
                           method = c("pcoa", "nmds"),
                           group_by,
                           distmat = NULL,
                           weighted = TRUE,
                           normalize = TRUE,
-                          cpus = 1,
+                          threads = 1,
+                          perm_design = NULL,
                           perm = 999) {
 
       ## Error handling
       #--------------------------------------------------------------------#
-
-      if (!is.character(metric) && length(metric) != 1)
-        cli::cli_abort("{metric} needs to be a character with a length of 1")
-
       if (!is.character(method) && length(method) != 1)
         cli::cli_abort("{method} needs to be a character with a length of 1")
 
@@ -794,8 +957,8 @@ omics <- R6::R6Class(
         cli::cli_abort("{group_by} does not exist in the metaData or is empty.")
       }
 
-      if (!is.wholenumber(cpus))
-        cli::cli_abort("{cpus} need to be an integer!")
+      if (!is.null(perm_design) && !is.function(perm_design))
+        cli::cli_abort("perm_design must be a function.")
 
       if (!is.wholenumber(perm))
         cli::cli_abort("Permutations {perm} need to be an integer")
@@ -832,34 +995,13 @@ omics <- R6::R6Class(
       # Creates a list of plots
       plot_list <- list()
 
-      # Normalizes counts
-      if (normalize)
-        self$normalize()
-
-      # Requires rownames to contain same labels as tree
       if (is.null(distmat)) {
-        counts <- slam::as.simple_triplet_matrix(self$countData)
-        rownames(counts) <- self$featureData$FEATURE_ID
-
-        distmat <- switch(
-          metric,
-          "unifrac" = rbiom::bdiv_distmat(
-            biom = counts,
-            bdiv = metric,
-            weighted = weighted,
-            tree = self$treeData,
-            cpus = cpus
-            ),
-          "manhattan" = ,
-          "euclidean" = ,
-          "jaccard" = ,
-          "bray" = rbiom::bdiv_distmat(
-            biom = counts,
-            bdiv = metric,
-            weighted = weighted,
-            cpus = cpus
-            )
-        )
+        distmat <- self$distance(
+          metric = metric,
+          normalized = normalize,
+          weighted = weighted,
+          threads = threads
+          )
       }
 
       plot_list$dist <- as.matrix(distmat)
@@ -874,26 +1016,25 @@ omics <- R6::R6Class(
                                 trace = FALSE,
                                 autotransform = FALSE)
       )
+      if (!is.null(perm_design)) metadata <- self$metaData else metadata <- NULL
       # Switch case to compute relevant statistics
       stats_results <- switch(
         method,
-        "pcoa" = pairwise_adonis(distmat, groups = self$metaData[[ group_by ]], perm = perm),
-        "nmds" = pairwise_anosim(distmat, groups = self$metaData[[ group_by ]], perm = perm)
+        "pcoa" = pairwise_adonis(distmat, groups = self$metaData[[ group_by ]], perm = perm, perm_design = perm_design, metadata = metadata),
+        "nmds" = pairwise_anosim(distmat, groups = self$metaData[[ group_by ]], perm = perm, perm_design = perm_design, metadata = metadata)
       )
       plot_list$anova_data <- stats_results
 
-      # Normalization of eigenvalues
-      if (method == "pcoa") {
-        pcs$eig_norm <- pcs$eig %>%
-          purrr::map(function(x) x / sum(pcs$eig) * 100) %>%
-          unlist()
+      # Data table of loading scores
+      df_pcs_points <- data.table::data.table(pcs$points)
 
-        # Collects loading scores into dataframe
-        df_pcs_points <- data.table::data.table(pcs$points)
+      if (method == "pcoa") {
+        # Normalisation of eigenvalues
+        pcs$eig_norm <- unlist(lapply(pcs$eig, function(x) x / sum(pcs$eig) * 100))
         colnames(df_pcs_points) <- paste0("PC", 1:ncol(df_pcs_points))
+
       } else if (method == "nmds") {
-        df_pcs_points <- data.table::data.table(pcs$points)
-        df_pcs_points$stress <- pcs$stress
+        df_pcs_points[['stress']] <- pcs$stress
       }
       plot_list$pcs <- df_pcs_points
 
@@ -970,9 +1111,17 @@ omics <- R6::R6Class(
     #' @param normalize A boolean value, whether to [`normalize()`](#method-normalize) by total sample sums (Default: TRUE).
     #' @examples
     #' library(ggplot2)
-    #' 
-    #' obj_path <- system.file("extdata", "mock_taxa.rds", package = "OmicFlow", mustWork = TRUE)
-    #' obj <- readRDS(obj_path)
+    #' library("OmicFlow")
+    #'
+    #' metadata_file <- system.file("extdata", "metadata.tsv", package = "OmicFlow")
+    #' counts_file <- system.file("extdata", "counts.tsv", package = "OmicFlow")
+    #' features_file <- system.file("extdata", "features.tsv", package = "OmicFlow")
+    #'
+    #' obj <- metagenomics$new(
+    #'  metaData = metadata_file,
+    #'  countData = counts_file,
+    #'  featureData = features_file,
+    #' )
     #'
     #' unpaired <- obj$DFE(feature_rank = "Genus",
     #'                     paired = FALSE,
@@ -1125,7 +1274,7 @@ omics <- R6::R6Class(
     #' @param weighted A boolean value, whether to compute weighted or unweighted dissimilarities (Default: TRUE).
     #' @param pvalue.threshold A numeric value, the p-value is used to include/exclude composition and foldchanges plots coming from alpha- and beta diversity analysis (Default: 0.05).
     #' @param perm A wholenumber, number of permutations to compare against the null hypothesis of \link[vegan]{adonis2} or \link[vegan]{anosim} (default: \code{perm=999}).
-    #' @param cpus Number of cores to use, only used in [`ordination()`](#method-ordination) when beta_div_table is not supplied.
+    #' @param threads Number of threads to use, only used in [`ordination()`](#method-ordination) when beta_div_table is not supplied (default: 1).
     #' @param filename A character to name the HTML report, it can also be a filepath (e.g. \code{"/path/to/report.html"}). Default: "report.html" in your current work directory.
     #' @importFrom patchwork plot_layout wrap_plots
     #' @return A report in HTML format
@@ -1139,7 +1288,7 @@ omics <- R6::R6Class(
                         weighted = TRUE,
                         pvalue.threshold = 0.05,
                         perm = 999,
-                        cpus = 1,
+                        threads = 1,
                         filename = paste0(getwd(), "/report.html")
                       ) {
     ## Error handling
@@ -1317,7 +1466,7 @@ omics <- R6::R6Class(
               normalize = normalize,
               weighted = weighted,
               perm = perm,
-              cpus = cpus
+              threads = threads
               )
           }
           
@@ -1361,7 +1510,8 @@ omics <- R6::R6Class(
               group_by = col_name,
               weighted = weighted,
               normalize = normalize,
-              perm = perm
+              perm = perm,
+              threads = threads
               )
           }
 
