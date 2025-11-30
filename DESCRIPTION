@@ -1,7 +1,7 @@
 Package: OmicFlow
 Title: Fast and Efficient (Automated) Analysis of Sparse Omics Data
-Version: 1.4.0
-Date: 2025-10-29
+Version: 1.4.2
+Date: 2025-11-30
 Authors@R: c(
     person(
         "Alem", "Gusinac",
@@ -28,14 +28,14 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 Depends: R (>= 4.3.0), R6, data.table, Matrix
-Imports: ape, gghalves, ggpubr, ggrepel, ggplot2 (>= 3.5.2), jsonlite,
-        jsonvalidate, magrittr, methods, patchwork, RColorBrewer,
-        rhdf5, rstatix, Rcpp (>= 0.12.6), RcppParallel (>= 4.3.20),
-        stats, tools, utils, vegan, yyjsonr
+Imports: ape, ggpubr, ggrepel, ggplot2, jsonlite, jsonvalidate,
+        magrittr, methods, patchwork, RColorBrewer, rhdf5, rstatix,
+        Rcpp (>= 0.12.6), RcppParallel (>= 4.3.20), stats, tools,
+        utils, vegan, yyjsonr
 Suggests: DT, downloadthis, rmarkdown, cli, testthat (>= 3.0.0)
 LinkingTo: Rcpp, RcppParallel, RcppArmadillo
 NeedsCompilation: yes
-Packaged: 2025-10-29 11:18:50 UTC; Z289224
+Packaged: 2025-11-30 19:56:01 UTC; pokepup
 Author: Alem Gusinac [aut, cre] (ORCID:
     <https://orcid.org/0009-0006-1896-4176>),
   Thomas Ederveen [aut] (ORCID: <https://orcid.org/0000-0003-0068-1275>),
@@ -43,4 +43,4 @@ Author: Alem Gusinac [aut, cre] (ORCID:
     <https://orcid.org/0000-0003-4495-5880>)
 Maintainer: Alem Gusinac <alem.gusinac@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-10-29 13:00:14 UTC
+Date/Publication: 2025-11-30 20:10:02 UTC

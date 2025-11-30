@@ -11,7 +11,7 @@
 #' @param p.adjust.method A character variable to specify the p.adjust.method to be used (Default: fdr).
 #' @return A \link[ggplot2]{ggplot2} object to be further modified
 #'
-#' @importFrom ggplot2 ggplot aes .data theme_bw theme element_text scale_colour_manual labs
+#' @importFrom ggplot2 ggplot aes .data theme_bw theme element_text scale_colour_manual labs geom_boxplot
 #' @importFrom stats p.adjust.methods
 #' 
 #' @examples
@@ -111,8 +111,7 @@ diversity_plot <- function(data,
   plt <- data %>%
     ggplot(mapping = aes(x = as.factor(.data[[ col_name ]]),
                          y = .data[[ values ]])) +
-    gghalves::geom_half_boxplot() +
-    gghalves::geom_half_point_panel(aes(color = as.factor(.data[[ col_name ]]))) +
+    geom_boxplot() +
     theme_bw() +
     theme(legend.position = "none",
           text=element_text(size=14),
