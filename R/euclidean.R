@@ -1,12 +1,12 @@
-#' Compute Manhattan Dissimilarity from a Dense or Sparse Matrix.
+#' Compute Euclidean Dissimilarity from a from a Dense or Sparse Matrix.
 #'
 #' @description 
-#' Calculates the Manhattan dissimilarity of a Matrix pairwise for each column.
+#' Calculates the Euclidean dissimilarity of a Matrix pairwise for each column.
 #' 
 #' @details
-#' The Manhattan dissimilarity between two samples \eqn{A} and \eqn{B}, each of length \eqn{n}, is defined as:
+#' The Euclidean dissimilarity between two samples \eqn{A} and \eqn{B}, each of length \eqn{n}, is defined as:
 #'
-#' \eqn{d(A, B) = \sum_{i}^n |A_i - B_i|}
+#' \eqn{d(A,B) = \sqrt{\sum_{i=1}^n (A_i - B_i)^2}}
 #'
 #' where \eqn{A_i} and \eqn{B_i} are the abundances of the \eqn{i}-th feature in sample \eqn{A} and \eqn{B}, respectively.
 #' When weighted is set to FALSE, counts are replaced by presence/absence data.
@@ -15,8 +15,6 @@
 #' @param weighted A boolean value, to use abundances (\code{weighted = TRUE}) or absence/presence (\code{weighted=FALSE}) (default: TRUE).
 #' @param threads A wholenumber, the number of threads to use in \link[RcppParallel]{setThreadOptions} (default: 1).
 #' @return A column x column \link[stats]{dist} object.
-#' @references
-#' Deza, M. M., & Deza, E. (2009). Encyclopedia of Distances. Springer Science & Business Media., 313.
 #' @examples 
 #' library("OmicFlow")
 #'
@@ -35,20 +33,23 @@
 #' taxa$feature_subset(Kingdom == "Bacteria")
 #' taxa$scale(method = "tss")
 #'
-#' manhattan(taxa$countData)
+#' euclidean(taxa$countData)
 #' @importFrom RcppParallel setThreadOptions
 #' @importFrom Matrix sparseMatrix
 #' @importFrom stats as.dist
 #' @export
 
-manhattan <- function(x, weighted = TRUE, threads = 1) {
+euclidean <- function(x, weighted = TRUE, threads = 1) {
 
     ## Error handling
     #--------------------------------------------------------------------#
+    if (is.vector(x))
+        cli::cli_abort("Input must a matrix of class matrix or Matrix, not a vector.")
+
     if (inherits(x, "denseMatrix") || inherits(x, "matrix") || inherits(x, "sparseMatrix")) {
         x <- as(x, "CsparseMatrix")
     } else cli::cli_abort("Input isn't a {.cls matrix}, {.cls denseMatrix} or {.cls sparseMatrix}.")
-    
+
     if (!is.numeric(x@x))
         cli::cli_abort("Input data must be numeric.")
 
@@ -61,7 +62,7 @@ manhattan <- function(x, weighted = TRUE, threads = 1) {
     if (!weighted) x@x[] <- 1
 
     RcppParallel::setThreadOptions(numThreads = threads)
-    out <- .Call('_OmicFlow_manhattan', PACKAGE = 'OmicFlow', x)
+    out <- .Call('_OmicFlow_euclidean', PACKAGE = 'OmicFlow', x)
 
     col_names <- colnames(x)
     if (!is.null(col_names))
